@@ -48,13 +48,13 @@ def executar_acao(temp, acao, pessoas):
     return nova_temp
 
 # Função para simulação de aprendizado com variação gradual da temperatura
-def q_learning_simulacao(agent, episodios=1000):
+def q_learning_simulacao(agent, episodios=100):
     historico = []
     temperaturas = []
     pessoas_totais = []
     for episodio in range(episodios):
         temp = TEMPERATURA_INICIAL
-        pessoas = random.randint(12, 40)
+        pessoas = random.randint(20, 40)
         estado = criar_estado(temp, pessoas)
         inicializar_estado(estado)
         recompensa_total = 0
@@ -62,7 +62,8 @@ def q_learning_simulacao(agent, episodios=1000):
         for _ in range(100):  # Máximo de iterações por episódio
             acao = agent.decide_action(temp, pessoas)  # Decisão do agente
             nova_temp = executar_acao(temp, acao, pessoas)  # Temperatura agora varia mais lentamente
-            nova_pessoas = random.randint(1, 20)  # Simula variação de pessoas
+            nova_pessoas = random.randint(5, 30)  # Simula variação de pessoas
+            nova_pessoas = round(nova_pessoas)  # Arredonda para garantir que o valor de pessoas seja inteiro
             novo_estado = criar_estado(nova_temp, nova_pessoas)
             inicializar_estado(novo_estado)  # Garante que o estado exista na tabela Q
             
@@ -91,22 +92,28 @@ def q_learning_simulacao(agent, episodios=1000):
 # Rodar simulação
 resultados, temperaturas, pessoas_totais = q_learning_simulacao(agent)
 
-# Visualizar aprendizado
-fig, ax1 = plt.subplots()
+# Plot 1: Gráfico de recompensa
+plt.figure(figsize=(10, 5))
+plt.plot(resultados, color='tab:blue', label='Recompensa Total')
+plt.xlabel('Episódios')
+plt.ylabel('Recompensa Total')
+plt.title('Recompensa Total ao Longo dos Episódios')
+plt.legend()
+plt.show(block=False)  # Não bloqueia a execução para abrir outro gráfico
+
+# Plot 2: Gráfico de temperatura e pessoas
+fig, ax1 = plt.subplots(figsize=(10, 5))
 
 ax1.set_xlabel('Episódios')
-ax1.set_ylabel('Recompensa Total', color='tab:blue')
-ax1.plot(resultados, color='tab:blue', label='Recompensa Total')
+ax1.set_ylabel('Temperatura (°C)', color='tab:red')
+ax1.plot(temperaturas, color='tab:red', label='Temperatura Média', linestyle='--')
+ax1.tick_params(axis='y', labelcolor='tab:red')
 
 ax2 = ax1.twinx()
-ax2.set_ylabel('Temperatura Média', color='tab:red')
-ax2.plot(np.mean(temperaturas), color='tab:red', label='Temperatura Média', linestyle='--')
+ax2.set_ylabel('Pessoas', color='tab:green')
+ax2.plot(pessoas_totais, color='tab:green', label='Pessoas Médias', linestyle='-.')
+ax2.tick_params(axis='y', labelcolor='tab:green')
 
-ax3 = ax1.twinx()
-ax3.spines['right'].set_position(('outward', 60))  # Ajustar posição do terceiro eixo Y
-ax3.set_ylabel('Pessoas Médias', color='tab:green')
-ax3.plot(np.mean(pessoas_totais), color='tab:green', label='Pessoas Médias', linestyle='-.')
-
-fig.tight_layout()  # Ajusta o layout
-plt.title("Simulação de Q-Learning para Controle de Temperatura")
-plt.show()
+fig.tight_layout()  # Ajusta o layout para não sobrepor labels
+plt.title("Temperatura e Pessoas ao Longo dos Episódios")
+plt.show()  # O segundo gráfico aparecerá junto com o primeiro
