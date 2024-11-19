@@ -49,9 +49,9 @@ A simulação leva em consideração a ação de *aquecimento*, *resfriamento* o
 
 Ao executar a simulação, o agente aprenderá a controlar a temperatura do ambiente, buscando sempre manter a faixa ideal. Os resultados serão visualizados em gráficos, incluindo:
 
-    Recompensa Total ao Longo dos Episódios
-    Temperatura Média
-    Número Médio de Pessoas
+   - Recompensa Total ao Longo dos Episódios
+   - Temperatura Média
+   - Número Médio de Pessoas
 
 ## ⚙️ Como Funciona
 
