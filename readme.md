@@ -58,7 +58,7 @@ Ao executar a simulação, o agente aprenderá a controlar a temperatura do ambi
 O agente toma decisões de acordo com a técnica de Q-Learning, utilizando a tabela Q para atualizar e aprender a melhor ação com base nas recompensas que recebe. O modelo é treinado por meio de episódios, em que o ambiente simula variações no número de pessoas e na temperatura.
 ### Funções Principais:
 
-    criar_estado(temp, pessoas): Cria o estado do ambiente com a temperatura e número de pessoas.
-    executar_acao(temp, acao, pessoas): Aplica a ação escolhida (aquecimento, resfriamento ou manter) e retorna a nova temperatura.
-    calcular_recompensa(temp): Calcula a recompensa dependendo da temperatura (penalidades para temperaturas fora da faixa ideal).
-    q_learning_simulacao(agent): Executa a simulação do aprendizado, coletando dados para análise.
+  - **criar_estado(temp, pessoas):** Cria o estado do ambiente com a temperatura e número de pessoas.
+  - **executar_acao(temp, acao, pessoas):** Aplica a ação escolhida (aquecimento, resfriamento ou manter) e retorna a nova temperatura.
+  - **calcular_recompensa(temp):** Calcula a recompensa dependendo da temperatura (penalidades para temperaturas fora da faixa ideal).
+  - **q_learning_simulacao(agent):** Executa a simulação do aprendizado, coletando dados para análise.
