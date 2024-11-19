@@ -31,7 +31,7 @@ A simulação leva em consideração a ação de *aquecimento*, *resfriamento* o
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seuusuario/controle-temperatura-ql.git
+   git clone https://github.com/lucasjordaoreal/Controle-de-Temperatura.git
 
 2. Navegue até o diretório do projeto:
     ```bash
